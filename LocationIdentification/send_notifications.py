@@ -27,15 +27,13 @@ def send_notification(locationid, camera_id, closest_ext_id, cur):
     numbers = []
     emails = []
 
-    dont = ['yucel.cimtay@tedu.edu.tr', 'gokce.yilmaz@tedu.edu.tr', 'venera.adanova@tedu.edu.tr']
+    #hocalar = ['yucel.cimtay@tedu.edu.tr', 'gokce.yilmaz@tedu.edu.tr', 'venera.adanova@tedu.edu.tr']
 
     for u, username, sms_enable, phone_no, email_enable, email in users:
         if(sms_enable):
             numbers.append(phone_no)
         if(email_enable):
-            
-            if(email not in dont):
-                emails.append(email)
+            emails.append(email)
 
     message = create_message(locationid, closest_ext_id, camera_id, cur)
     
