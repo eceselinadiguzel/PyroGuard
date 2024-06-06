@@ -12,7 +12,7 @@
  Target Server Version : 160002 (160002)
  File Encoding         : 65001
 
- Date: 06/06/2024 01:11:12
+ Date: 06/06/2024 20:26:55
 */
 
 
@@ -138,14 +138,16 @@ CREATE TABLE "public"."cameras" (
   "angle" int4 NOT NULL,
   "camera_y" varchar(50) COLLATE "pg_catalog"."default" NOT NULL,
   "camera_x" varchar(50) COLLATE "pg_catalog"."default" NOT NULL,
-  "focal_length" float8 NOT NULL
+  "focal_length" float8 NOT NULL,
+  "azimuth" int4 NOT NULL
 )
 ;
 
 -- ----------------------------
 -- Records of cameras
 -- ----------------------------
-INSERT INTO "public"."cameras" VALUES (16, 'examplecam', 'f', 6, 3, 'exampleip', NULL, 45, '0', '0', 35);
+INSERT INTO "public"."cameras" VALUES (19, 'examplecam', 'f', 6, 3, 'exampleip', NULL, 45, '0', '0', 35, 0);
+INSERT INTO "public"."cameras" VALUES (20, 'examplecam', 'f', 6, 3, 'exampleip', NULL, 30, '100', '890', 35, 0);
 
 -- ----------------------------
 -- Table structure for events
@@ -165,7 +167,7 @@ CREATE TABLE "public"."events" (
 -- ----------------------------
 -- Records of events
 -- ----------------------------
-INSERT INTO "public"."events" VALUES (48, '2024-06-06 01:09:01.777262', 16, 'f', 6, NULL, '2024-06-06');
+INSERT INTO "public"."events" VALUES (53, '2024-06-06 14:18:17.883574', 19, 'f', 6, NULL, '2024-06-06');
 
 -- ----------------------------
 -- Table structure for extinguishers
@@ -175,7 +177,6 @@ CREATE TABLE "public"."extinguishers" (
   "extinguisherid" int4 NOT NULL DEFAULT nextval('extinguishers_extinguisherid_seq'::regclass),
   "extinguisher_type" varchar(50) COLLATE "pg_catalog"."default",
   "location_description" varchar(255) COLLATE "pg_catalog"."default",
-  "extinguisher_x_axis" float8,
   "locationid" int4 NOT NULL,
   "logid" int4,
   "extinguisher_x" varchar(50) COLLATE "pg_catalog"."default" NOT NULL,
@@ -186,7 +187,7 @@ CREATE TABLE "public"."extinguishers" (
 -- ----------------------------
 -- Records of extinguishers
 -- ----------------------------
-INSERT INTO "public"."extinguishers" VALUES (12, NULL, 'example fire extinguisher', NULL, 6, NULL, '1', '1');
+INSERT INTO "public"."extinguishers" VALUES (12, NULL, 'example fire extinguisher', 6, NULL, '1', '1');
 
 -- ----------------------------
 -- Table structure for locations
@@ -243,10 +244,10 @@ CREATE TABLE "public"."notifications" (
 -- ----------------------------
 -- Records of notifications
 -- ----------------------------
-INSERT INTO "public"."notifications" VALUES (32, 48, 'example notification', 12, 33, NULL);
-INSERT INTO "public"."notifications" VALUES (33, 48, 'example notification', 12, 35, NULL);
-INSERT INTO "public"."notifications" VALUES (34, 48, 'example notification', 12, 36, NULL);
-INSERT INTO "public"."notifications" VALUES (35, 48, 'example notification', 12, 37, NULL);
+INSERT INTO "public"."notifications" VALUES (38, 53, 'example notification', 12, 33, NULL);
+INSERT INTO "public"."notifications" VALUES (39, 53, 'example notification', 12, 35, NULL);
+INSERT INTO "public"."notifications" VALUES (40, 53, 'example notification', 12, 36, NULL);
+INSERT INTO "public"."notifications" VALUES (41, 53, 'example notification', 12, 37, NULL);
 
 -- ----------------------------
 -- Table structure for system_configuration
@@ -336,21 +337,21 @@ SELECT setval('"public"."alarms_alarmid_seq"', 18, true);
 -- ----------------------------
 ALTER SEQUENCE "public"."cameras_cameraid_seq"
 OWNED BY "public"."cameras"."cameraid";
-SELECT setval('"public"."cameras_cameraid_seq"', 16, true);
+SELECT setval('"public"."cameras_cameraid_seq"', 20, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."events_eventid_seq"
 OWNED BY "public"."events"."eventid";
-SELECT setval('"public"."events_eventid_seq"', 48, true);
+SELECT setval('"public"."events_eventid_seq"', 53, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."extinguishers_extinguisherid_seq"
 OWNED BY "public"."extinguishers"."extinguisherid";
-SELECT setval('"public"."extinguishers_extinguisherid_seq"', 12, true);
+SELECT setval('"public"."extinguishers_extinguisherid_seq"', 13, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -371,14 +372,14 @@ SELECT setval('"public"."maintanence_logid_seq"', 8, true);
 -- ----------------------------
 ALTER SEQUENCE "public"."notifications_notificationid_seq"
 OWNED BY "public"."notifications"."notificationid";
-SELECT setval('"public"."notifications_notificationid_seq"', 35, true);
+SELECT setval('"public"."notifications_notificationid_seq"', 41, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."users_userid_seq"
 OWNED BY "public"."users"."userid";
-SELECT setval('"public"."users_userid_seq"', 40, true);
+SELECT setval('"public"."users_userid_seq"', 42, true);
 
 -- ----------------------------
 -- Primary Key structure for table alarms
